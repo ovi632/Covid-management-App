@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="607.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Ishika.ExpiryAndDisposalManagerSceneController">
+   <children>
+      <Label fx:id="expiryAndDisposalManagerLabel" layoutX="29.0" layoutY="23.0" prefHeight="114.0" prefWidth="254.0" />
+      <Button fx:id="refreshButtonOA" layoutX="320.0" layoutY="105.0" mnemonicParsing="false" text="Refresh" />
+      <Label fx:id="notificationLabel" layoutX="434.0" layoutY="30.0" prefHeight="114.0" prefWidth="254.0" />
+      <TableView fx:id="expiryAndDMSTV" layoutX="14.0" layoutY="190.0" prefHeight="200.0" prefWidth="718.0">
+        <columns>
+          <TableColumn fx:id="expiryAndDMS_MedicineNameTC" prefWidth="156.0" text="Medicine Name" />
+          <TableColumn fx:id="expiryAndDMS_BatchNumberTC" prefWidth="121.60003662109375" text="Batch Number" />
+            <TableColumn fx:id="expiryAndDMS_expiryDateTC" prefWidth="157.5999755859375" text="Expiry Date" />
+            <TableColumn fx:id="expiryAndDMS_currentQuantityTC" prefWidth="158.39996337890625" text="Current Quantity" />
+            <TableColumn fx:id="expiryAndDMs_StatusTC" prefWidth="125.60003662109375" text="Status" />
+        </columns>
+      </TableView>
+      <TextField fx:id="disposalQuantityTF" layoutX="29.0" layoutY="421.0" prefHeight="26.0" prefWidth="150.0" promptText="Enter Disposal Quantity" />
+      <TextField fx:id="disposalReasonTF" layoutX="29.0" layoutY="466.0" promptText="Enter Disposal Reason" />
+      <Button layoutX="249.0" layoutY="422.0" mnemonicParsing="false" onAction="#disposeMedicineButtonOA" text="Dispose Medicine" />
+      <Button layoutX="249.0" layoutY="466.0" mnemonicParsing="false" onAction="#confirmMedicineButtonOA" text="Confirm Disposal" />
+      <Button layoutX="625.0" layoutY="506.0" mnemonicParsing="false" onAction="#backButtonOA" text="Back" />
+   </children>
+</AnchorPane>
