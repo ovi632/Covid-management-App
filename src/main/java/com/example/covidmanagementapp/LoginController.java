@@ -1,5 +1,8 @@
 package com.example.covidmanagementapp;
 
+import javafx.event.ActionEvent;
+import javafx.scene.control.*;
+
 public class LoginController
 {
     @javafx.fxml.FXML
