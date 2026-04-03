@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="589.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Ashraf.PatientInfoViewController">
+<AnchorPane prefHeight="589.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Ashraf.doctorCheckPatientInfoViewController">
    <children>
       <TableView layoutX="14.0" layoutY="173.0" onSort="#patientInfoTableView" prefHeight="200.0" prefWidth="598.0">
         <columns>

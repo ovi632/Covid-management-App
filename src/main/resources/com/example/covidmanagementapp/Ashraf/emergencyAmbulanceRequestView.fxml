@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="392.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Ashraf.EmergencyAmbulanceRequestViewController">
+   <children>
+      <TextField fx:id="currentLocationTF" layoutX="28.0" layoutY="19.0" prefHeight="42.0" prefWidth="319.0" promptText="Current Location / Address" />
+      <ComboBox fx:id="emergencyTypeCB" layoutX="145.0" layoutY="78.0" prefHeight="26.0" prefWidth="160.0" />
+      <Label layoutX="28.0" layoutY="83.0" text="Emergency Type" />
+      <TextField fx:id="emergencyDescriptionTF" layoutX="397.0" layoutY="18.0" prefHeight="73.0" prefWidth="249.0" promptText="Emergency Description" />
+      <Label layoutX="364.0" layoutY="39.0" />
+      <Button layoutX="285.0" layoutY="156.0" mnemonicParsing="false" onAction="#sendEmergencyRequestButtonOA" text="Send Emergency Request" />
+      <Label fx:id="notificationLabel" layoutX="244.0" layoutY="196.0" prefHeight="42.0" prefWidth="240.0" />
+      <Button layoutX="304.0" layoutY="352.0" mnemonicParsing="false" onAction="#backToDashboardButtonOA" text="Back to Dashboard" />
+   </children>
+</AnchorPane>

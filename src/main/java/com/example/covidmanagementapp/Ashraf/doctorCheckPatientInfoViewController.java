@@ -6,8 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 
-public class PatientInfoViewController
+public class doctorCheckPatientInfoViewController
 {
+    @javafx.fxml.FXML
+    private Label notificationLabel;
     @javafx.fxml.FXML
     private TableColumn ageInPatientInfoTC;
     @javafx.fxml.FXML
@@ -17,17 +19,15 @@ public class PatientInfoViewController
     @javafx.fxml.FXML
     private TableColumn labReportInPatientInfoTC;
     @javafx.fxml.FXML
+    private TextField registrationIdTF;
+    @javafx.fxml.FXML
     private TableColumn covidStatusInPatientInfoTC;
+    @javafx.fxml.FXML
+    private Label infoShowLabel;
     @javafx.fxml.FXML
     private TableColumn vaccinationStatusInPatientInfoTC;
     @javafx.fxml.FXML
     private TableColumn genderInPatientInfoTC;
-    @javafx.fxml.FXML
-    private Label notificationLabel;
-    @javafx.fxml.FXML
-    private TextField registrationIdTF;
-    @javafx.fxml.FXML
-    private Label infoShowLabel;
 
     @javafx.fxml.FXML
     public void initialize() {
