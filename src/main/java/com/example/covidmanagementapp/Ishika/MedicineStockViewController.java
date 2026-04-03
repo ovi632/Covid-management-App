@@ -1,7 +1,7 @@
 package com.example.covidmanagementapp.Ishika;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -9,27 +9,25 @@ import javafx.scene.control.TextField;
 public class MedicineStockViewController
 {
     @javafx.fxml.FXML
-    private Label notificationLabel;
+    private TableColumn medicineNameTC;
     @javafx.fxml.FXML
-    private TableColumn medicineStockmedicineNameTC;
+    private Button backButtonOA;
     @javafx.fxml.FXML
-    private TextField medicineNameTF;
+    private TableColumn stockAlertTC;
     @javafx.fxml.FXML
-    private TableView medicineStockTableView;
+    private TextField maximumRangeTF;
     @javafx.fxml.FXML
-    private TableColumn medicineStockavailableQuantityTC;
+    private TableView medicineStockViewTV;
     @javafx.fxml.FXML
-    private TableColumn medicineStockStatusTC;
+    private TextField minimumRangeTF;
+    @javafx.fxml.FXML
+    private TableColumn quantityTC;
 
     @javafx.fxml.FXML
     public void initialize() {
     }
 
     @javafx.fxml.FXML
-    public void backButtonOA(ActionEvent actionEvent) {
-    }
-
-    @javafx.fxml.FXML
-    public void checkStockButtonOA(ActionEvent actionEvent) {
+    public void searchButtonOA(ActionEvent actionEvent) {
     }
 }
