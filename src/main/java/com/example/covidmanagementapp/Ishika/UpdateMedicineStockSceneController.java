@@ -16,6 +16,8 @@ public class UpdateMedicineStockSceneController
     private DatePicker datePicker;
     @javafx.fxml.FXML
     private TextField quantityTF;
+    @javafx.fxml.FXML
+    private Label notificationLabel;
 
     @javafx.fxml.FXML
     public void initialize() {
