@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="499.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Ishika.GenerateDailyCovidReportViewController">
+   <children>
+      <DatePicker fx:id="fromDateDP" layoutX="112.0" layoutY="35.0" />
+      <Label layoutX="44.0" layoutY="39.0" text="From Date:" />
+      <DatePicker fx:id="toDateDP" layoutX="112.0" layoutY="72.0" />
+      <Label layoutX="44.0" layoutY="76.0" text="To Date:" />
+      <Label fx:id="notificationLabel" layoutX="339.0" layoutY="23.0" prefHeight="75.0" prefWidth="198.0" />
+      <Button layoutX="228.0" layoutY="124.0" mnemonicParsing="false" onAction="#generateReportButtonOA" text="Generate Report" />
+      <TableView fx:id="generateDailyCovidReportViewTV" layoutX="8.0" layoutY="169.0" prefHeight="200.0" prefWidth="578.0">
+        <columns>
+          <TableColumn fx:id="totalPatientsTC" prefWidth="128.800048828125" text="Total Patients" />
+          <TableColumn fx:id="totalCovidCasesTC" prefWidth="149.5999755859375" text="Total Covid Cases" />
+            <TableColumn fx:id="totalVaccinationsTC" prefWidth="158.4000244140625" text="Total Vaccinations" />
+            <TableColumn fx:id="generateDateTC" prefWidth="142.4000244140625" text="Generated Date" />
+        </columns>
+      </TableView>
+      <Button fx:id="backButtonOA" layoutX="470.0" layoutY="405.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="Back" />
+   </children>
+</AnchorPane>
