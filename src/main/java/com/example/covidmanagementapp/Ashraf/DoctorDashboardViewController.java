@@ -9,10 +9,38 @@ public class DoctorDashboardViewController
     }
 
     @javafx.fxml.FXML
-    public void viewPatientReportButtonOA(ActionEvent actionEvent) {
+    public void patientInfoButtonOA(ActionEvent actionEvent) {
     }
 
     @javafx.fxml.FXML
-    public void viewCovidStatusButtonOA(ActionEvent actionEvent) {
+    public void digitalPrescriptionButtonOA(ActionEvent actionEvent) {
+    }
+
+    @javafx.fxml.FXML
+    public void updateCovidCaseStatusButtonOA(ActionEvent actionEvent) {
+    }
+
+    @javafx.fxml.FXML
+    public void covidStatisticsButtonOA(ActionEvent actionEvent) {
+    }
+
+    @javafx.fxml.FXML
+    public void quarantineInstructionsButtonOA(ActionEvent actionEvent) {
+    }
+
+    @javafx.fxml.FXML
+    public void updateRecoveryStatusButtonOA(ActionEvent actionEvent) {
+    }
+
+    @javafx.fxml.FXML
+    public void folloupButtonOA(ActionEvent actionEvent) {
+    }
+
+    @javafx.fxml.FXML
+    public void logOutButtonOA(ActionEvent actionEvent) {
+    }
+
+    @javafx.fxml.FXML
+    public void addDiagnosisButtonOA(ActionEvent actionEvent) {
     }
 }

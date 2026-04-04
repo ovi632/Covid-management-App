@@ -1,6 +1,11 @@
 package com.example.covidmanagementapp.Ishika;
 
+import com.example.covidmanagementapp.HelloApplication;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class PharmacyDashboardViewController
 {
@@ -10,10 +15,12 @@ public class PharmacyDashboardViewController
 
     @javafx.fxml.FXML
     public void pharmacyStaffViewPrescriptionButtonOA(ActionEvent actionEvent) {
+
     }
 
     @javafx.fxml.FXML
     public void pharmacyStaffDispenseMedicineButtonOA(ActionEvent actionEvent) {
+
     }
 
     @javafx.fxml.FXML
