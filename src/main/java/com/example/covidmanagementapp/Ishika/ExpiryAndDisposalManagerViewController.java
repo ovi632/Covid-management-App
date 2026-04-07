@@ -3,7 +3,7 @@ package com.example.covidmanagementapp.Ishika;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 
-public class ExpiryAndDisposalManagerSceneController
+public class ExpiryAndDisposalManagerViewController
 {
     @javafx.fxml.FXML
     private Label notificationLabel;
@@ -18,6 +18,8 @@ public class ExpiryAndDisposalManagerSceneController
     @javafx.fxml.FXML
     private TableView expiryAndDMSTV;
     @javafx.fxml.FXML
+    private TableColumn expiryAndDMS_MedicineNameTC;
+    @javafx.fxml.FXML
     private TableColumn expiryAndDMS_BatchNumberTC;
     @javafx.fxml.FXML
     private Label expiryAndDisposalManagerLabel;
@@ -25,8 +27,6 @@ public class ExpiryAndDisposalManagerSceneController
     private TableColumn expiryAndDMS_currentQuantityTC;
     @javafx.fxml.FXML
     private TextField disposalQuantityTF;
-    @javafx.fxml.FXML
-    private TableColumn expiryAndDMS_MedicineNameTC;
 
     @javafx.fxml.FXML
     public void initialize() {

@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class GenerateMedicineUsageReportSceneController
+public class GenerateMedicineUsageReportViewController
 {
     @javafx.fxml.FXML
     private Label medicineUsageReportLabel;
