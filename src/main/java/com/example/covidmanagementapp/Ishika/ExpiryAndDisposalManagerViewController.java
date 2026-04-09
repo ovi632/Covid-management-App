@@ -1,7 +1,12 @@
 package com.example.covidmanagementapp.Ishika;
 
+import com.example.covidmanagementapp.HelloApplication;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class ExpiryAndDisposalManagerViewController
 {
@@ -34,6 +39,16 @@ public class ExpiryAndDisposalManagerViewController
 
     @javafx.fxml.FXML
     public void backButtonOA(ActionEvent actionEvent) {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ishika/pharmacyDashboardView.fxml"));
+            Scene updateMedicineStockScenescene = new Scene(fxmlLoader.load());
+            Stage updateMedicineStockSceneStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            updateMedicineStockSceneStage.setTitle("Pharmacy Dashboard");
+            updateMedicineStockSceneStage.setScene(updateMedicineStockScenescene);
+            updateMedicineStockSceneStage.show();
+        }catch (Exception e){
+            //
+        }
     }
 
     @javafx.fxml.FXML

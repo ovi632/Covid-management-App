@@ -1,10 +1,15 @@
 package com.example.covidmanagementapp.Ishika;
 
+import com.example.covidmanagementapp.HelloApplication;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 public class GenerateMedicineUsageReportViewController
 {
@@ -43,6 +48,16 @@ public class GenerateMedicineUsageReportViewController
 
     @javafx.fxml.FXML
     public void backButtonOA(ActionEvent actionEvent) {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ishika/pharmacyDashboardView.fxml"));
+            Scene generateMedicineUsageReportView = new Scene(fxmlLoader.load());
+            Stage generateMedicineUsageReportViewStage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+            generateMedicineUsageReportViewStage.setTitle("Pharmacy Dashboard");
+            generateMedicineUsageReportViewStage.setScene(generateMedicineUsageReportView);
+            generateMedicineUsageReportViewStage.show();
+        }catch (Exception e){
+            //
+        }
     }
 
     @javafx.fxml.FXML
