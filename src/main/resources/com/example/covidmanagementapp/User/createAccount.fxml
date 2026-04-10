@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.User.CreateAccountController">
+   <children>
+      <ComboBox fx:id="userCB" layoutX="182.0" layoutY="14.0" prefHeight="26.0" prefWidth="160.0" />
+      <Label layoutX="90.0" layoutY="19.0" text="User" />
+      <TextField fx:id="IDTF" layoutX="182.0" layoutY="56.0" />
+      <PasswordField fx:id="passwordPF" layoutX="182.0" layoutY="139.0" />
+      <Label layoutX="62.0" layoutY="61.0" text="Enter a valiid ID" />
+      <Label layoutX="58.0" layoutY="103.0" text="Enter your Name" />
+      <Label layoutX="47.0" layoutY="144.0" text="Enter New Password" />
+      <TextField fx:id="nameTF" layoutX="182.0" layoutY="99.0" />
+      <Label fx:id="notificationLabel" layoutX="182.0" layoutY="242.0" prefHeight="74.0" prefWidth="130.0" text="Label" />
+      <Button layoutX="421.0" layoutY="352.0" mnemonicParsing="false" onAction="#backToLoginButtonOA" prefHeight="26.0" prefWidth="137.0" text="Back to Login" />
+      <Button layoutX="255.0" layoutY="200.0" mnemonicParsing="false" onAction="#createProfileButtonOA" text="Create Profile" />
+   </children>
+</AnchorPane>
