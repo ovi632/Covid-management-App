@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -16,26 +17,30 @@ public class doctorCheckPatientInfoViewController
     @javafx.fxml.FXML
     private Label notificationLabel;
     @javafx.fxml.FXML
-    private TableColumn ageInPatientInfoTC;
+    private TableColumn<Patient,Integer> ageInPatientInfoTC;
     @javafx.fxml.FXML
-    private TableColumn nameInPatientInfoTC;
+    private TableColumn<Patient,String> nameInPatientInfoTC;
     @javafx.fxml.FXML
-    private TableColumn previousDiagnosesInPatientInfoTC;
-    @javafx.fxml.FXML
-    private TableColumn labReportInPatientInfoTC;
+    private TableColumn<Patient,String> previousDiagnosesInPatientInfoTC;
     @javafx.fxml.FXML
     private TextField registrationIdTF;
     @javafx.fxml.FXML
-    private TableColumn covidStatusInPatientInfoTC;
-    @javafx.fxml.FXML
     private Label infoShowLabel;
     @javafx.fxml.FXML
-    private TableColumn vaccinationStatusInPatientInfoTC;
+    private TableColumn<Patient,String> genderInPatientInfoTC;
     @javafx.fxml.FXML
-    private TableColumn genderInPatientInfoTC;
+    private TableView<Patient> patientInfoTableView;
 
     @javafx.fxml.FXML
     public void initialize() {
+        nameInPatientInfoTC.setCellValueFactory(
+                new javafx.scene.control.cell.PropertyValueFactory<>("name"));
+
+        ageInPatientInfoTC.setCellValueFactory(
+                new javafx.scene.control.cell.PropertyValueFactory<>("age"));
+
+        genderInPatientInfoTC.setCellValueFactory(
+                new javafx.scene.control.cell.PropertyValueFactory<>("gender"));
     }
 
     @javafx.fxml.FXML
@@ -54,9 +59,30 @@ public class doctorCheckPatientInfoViewController
 
     @javafx.fxml.FXML
     public void SearchButtonOA(ActionEvent actionEvent) {
+        try {
+            int id = Integer.parseInt(registrationIdTF.getText());
+
+            PatientFile.loadPatients();
+
+            patientInfoTableView.getItems().clear();
+
+            for (Patient p : PatientFile.patientList) {
+
+                if (p.getId() == id) {
+
+                    patientInfoTableView.getItems().add(p);
+
+                    notificationLabel.setText("Patient Found!");
+                    return;
+                }
+            }
+
+            notificationLabel.setText("Patient not found!");
+
+        } catch (Exception e) {
+            notificationLabel.setText("Enter valid ID!");
+        }
+
     }
 
-    @javafx.fxml.FXML
-    public void patientInfoTableView(Event event) {
-    }
 }

@@ -1,4 +1,4 @@
-package com.example.covidmanagementapp.util;
+package com.example.covidmanagementapp.User;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -14,4 +14,5 @@ public class AppendableObjectOutputStream extends ObjectOutputStream {
     protected void writeStreamHeader() throws IOException {
         reset();
     }
+
 }

@@ -11,7 +11,7 @@
    <children>
       <TextField fx:id="symptomsTF" layoutX="131.0" layoutY="160.0" />
       <Label layoutX="12.0" layoutY="164.0" text="Symptoms :" />
-      <TextField layoutX="131.0" layoutY="193.0" onAction="#diagnosisDetailsTF" prefHeight="59.0" prefWidth="161.0" />
+      <TextField fx:id="diagnosisDetailsTF" layoutX="131.0" layoutY="193.0" prefHeight="59.0" prefWidth="161.0" />
       <Label layoutX="12.0" layoutY="197.0" text="Diagnosis Details :" />
       <ComboBox fx:id="dosageCB" layoutX="464.0" layoutY="160.0" prefWidth="150.0" />
       <Label layoutX="374.0" layoutY="164.0" text="Dosage" />

@@ -99,6 +99,17 @@ public class HealthDataEntryOperatorDashboardViewController
 
     @javafx.fxml.FXML
     public void logoutButtonOA(ActionEvent actionEvent) {
+
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/User/loginView.fxml"));
+            Scene updateRecoveryStatusViewscene = new Scene(fxmlLoader.load());
+            Stage updateRecoveryStatusViewStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            updateRecoveryStatusViewStage.setTitle("Covid Management App");
+            updateRecoveryStatusViewStage.setScene(updateRecoveryStatusViewscene);
+            updateRecoveryStatusViewStage.show();
+        }catch (Exception e){
+            //
+        }
     }
 
     @javafx.fxml.FXML

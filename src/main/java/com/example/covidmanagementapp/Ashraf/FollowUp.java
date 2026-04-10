@@ -1,15 +1,31 @@
 package com.example.covidmanagementapp.Ashraf;
 
-public class FollowUp {
-    private String patientName , notes , status ;
-    private int doctorId , registrationId ;
+import java.io.Serializable;
 
-    public FollowUp(String patientName, String notes, String status, int doctorId, int registrationId) {
+public class FollowUp implements Serializable {
+
+    private int patientId;
+    private String patientName;
+    private int doctorId;
+    private String date;
+    private String time;
+    private String note;
+
+    public FollowUp(int patientId, String patientName, int doctorId, String date, String time, String note) {
+        this.patientId = patientId;
         this.patientName = patientName;
-        this.notes = notes;
-        this.status = status;
         this.doctorId = doctorId;
-        this.registrationId = registrationId;
+        this.date = date;
+        this.time = time;
+        this.note = note;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public String getPatientName() {
@@ -20,22 +36,6 @@ public class FollowUp {
         this.patientName = patientName;
     }
 
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public int getDoctorId() {
         return doctorId;
     }
@@ -44,22 +44,39 @@ public class FollowUp {
         this.doctorId = doctorId;
     }
 
-    public int getRegistrationId() {
-        return registrationId;
+    public String getDate() {
+        return date;
     }
 
-    public void setRegistrationId(int registrationId) {
-        this.registrationId = registrationId;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     @Override
     public String toString() {
         return "FollowUp{" +
-                "patientName='" + patientName + '\'' +
-                ", notes='" + notes + '\'' +
-                ", status='" + status + '\'' +
+                "patientId=" + patientId +
+                ", patientName='" + patientName + '\'' +
                 ", doctorId=" + doctorId +
-                ", registrationId=" + registrationId +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", note='" + note + '\'' +
                 '}';
     }
 }

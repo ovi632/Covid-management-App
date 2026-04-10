@@ -127,13 +127,13 @@ public class PharmacyDashboardViewController
 
     @javafx.fxml.FXML
     public void logOutButtonOA(ActionEvent actionEvent) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ishika/pharmacyDashboardView.fxml"));
-            Scene pharmacyDashboardViewScene = new Scene(fxmlLoader.load());
-            Stage medicineStockViewSceneStage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-            medicineStockViewSceneStage.setTitle("Pharmacy Dashboard Window");
-            medicineStockViewSceneStage.setScene(pharmacyDashboardViewScene);
-            medicineStockViewSceneStage.show();
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/User/updateRecoveryStatusView.fxml"));
+            Scene updateRecoveryStatusViewscene = new Scene(fxmlLoader.load());
+            Stage updateRecoveryStatusViewStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            updateRecoveryStatusViewStage.setTitle("Covid Management App");
+            updateRecoveryStatusViewStage.setScene(updateRecoveryStatusViewscene);
+            updateRecoveryStatusViewStage.show();
         }catch (Exception e){
             //
         }

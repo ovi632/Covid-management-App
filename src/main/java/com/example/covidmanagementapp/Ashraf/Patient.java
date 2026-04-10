@@ -1,15 +1,30 @@
 package com.example.covidmanagementapp.Ashraf;
 
-public class Patient {
-    private String name , Id , gender ,phoneNumber ;
-    private int age ;
 
-    public Patient(String name, String id, String gender, String phoneNumber, int age) {
+import java.io.Serializable;
+
+public class Patient implements Serializable {
+
+    private int id;
+    private String name;
+    private int age;
+    private String gender;
+    private String disease;
+
+    public Patient(int id, String name, int age, String gender, String disease) {
+        this.id = id;
         this.name = name;
-        Id = id;
-        this.gender = gender;
-        this.phoneNumber = phoneNumber;
         this.age = age;
+        this.gender = gender;
+        this.disease = disease;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -20,12 +35,12 @@ public class Patient {
         this.name = name;
     }
 
-    public String getId() {
-        return Id;
+    public int getAge() {
+        return age;
     }
 
-    public void setId(String id) {
-        Id = id;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getGender() {
@@ -36,30 +51,22 @@ public class Patient {
         this.gender = gender;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getDisease() {
+        return disease;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+    public void setDisease(String disease) {
+        this.disease = disease;
     }
 
     @Override
     public String toString() {
         return "Patient{" +
-                "name='" + name + '\'' +
-                ", Id='" + Id + '\'' +
-                ", gender='" + gender + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", disease='" + disease + '\'' +
                 '}';
     }
 }

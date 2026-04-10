@@ -74,7 +74,7 @@ public class DoctorDashboardViewController
     @javafx.fxml.FXML
     public void quarantineInstructionsButtonOA(ActionEvent actionEvent) {
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ashraf/covidStaticsView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ashraf/quarantineInstructionsView.fxml"));
             Scene covidStaticsViewscene = new Scene(fxmlLoader.load());
             Stage covidStaticsViewStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             covidStaticsViewStage.setTitle("Covid Management App");
@@ -117,12 +117,12 @@ public class DoctorDashboardViewController
     public void logOutButtonOA(ActionEvent actionEvent) {
 
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ashraf/doctorDashBoardView.fxml"));
-            Scene doctorDashBoardViewscene = new Scene(fxmlLoader.load());
-            Stage doctorDashBoardViewStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-            doctorDashBoardViewStage.setTitle("Covid Management App");
-            doctorDashBoardViewStage.setScene(doctorDashBoardViewscene);
-            doctorDashBoardViewStage.show();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/User/loginView.fxml"));
+            Scene updateRecoveryStatusViewscene = new Scene(fxmlLoader.load());
+            Stage updateRecoveryStatusViewStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            updateRecoveryStatusViewStage.setTitle("Covid Management App");
+            updateRecoveryStatusViewStage.setScene(updateRecoveryStatusViewscene);
+            updateRecoveryStatusViewStage.show();
         }catch (Exception e){
             //
         }
@@ -131,7 +131,7 @@ public class DoctorDashboardViewController
     @javafx.fxml.FXML
     public void addDiagnosisButtonOA(ActionEvent actionEvent) {
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ashraf/followUpManagerView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ashraf/addDiagnosisView.fxml"));
             Scene followUpManagerViewscene = new Scene(fxmlLoader.load());
             Stage followUpManagerViewStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             followUpManagerViewStage.setTitle("Covid Management App");

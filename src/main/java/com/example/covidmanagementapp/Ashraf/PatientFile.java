@@ -6,12 +6,13 @@ import java.util.ArrayList;
 public class PatientFile {
     public static ArrayList<Patient> patientList = new ArrayList<>();
 
-    // 🔵 LOAD
     public static void loadPatients() {
+
         patientList.clear();
 
         try {
             File f = new File("Patient.bin");
+
             if (!f.exists()) return;
 
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
@@ -21,11 +22,10 @@ public class PatientFile {
             }
 
         } catch (Exception e) {
-            // End of file
+            //
         }
     }
 
-    // 🔵 SAVE (append)
     public static void addPatient(Patient p) {
 
         try {
@@ -33,7 +33,7 @@ public class PatientFile {
             ObjectOutputStream oos;
 
             if (f.exists()) {
-                oos = new AppendableObjectOutputStream(new FileOutputStream(f, true));
+                oos = new com.example.covidmanagementapp.util.AppendableObjectOutputStream(new FileOutputStream(f, true));
             } else {
                 oos = new ObjectOutputStream(new FileOutputStream(f));
             }
@@ -42,7 +42,7 @@ public class PatientFile {
             oos.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            //
         }
     }
 }

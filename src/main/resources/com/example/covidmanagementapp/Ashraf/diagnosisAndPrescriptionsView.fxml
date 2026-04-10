@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="442.0" prefWidth="814.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Ashraf.DiagnosisAndPrescriptionsViewController">
    <children>
       <DatePicker fx:id="fromDatePicker" layoutX="121.0" layoutY="19.0" prefHeight="26.0" prefWidth="158.0" />
@@ -19,12 +18,11 @@
       <TableView fx:id="diagnosisAndPrescriptionsTV" layoutX="10.0" layoutY="152.0" prefHeight="200.0" prefWidth="799.0">
         <columns>
           <TableColumn fx:id="DateTC" prefWidth="75.0" text="Date" />
-          <TableColumn fx:id="symptomsSummaryTC" prefWidth="155.0" text="Symptoms Summary" />
             <TableColumn fx:id="diagnosisSummaryTC" minWidth="0.0" prefWidth="163.0" text="Diagnosis Summary" />
             <TableColumn fx:id="prescribedMedicineTC" prefWidth="155.0" text="Prescribed Medicine" />
-            <TableColumn fx:id="dosageTC" text="Dosage" />
-            <TableColumn fx:id="durationTC" prefWidth="82.0" text="Duration" />
-            <TableColumn fx:id="doctorIdTC" prefWidth="88.0" text="Doctor ID" />
+            <TableColumn fx:id="dosageTC" prefWidth="104.0" text="Dosage" />
+            <TableColumn fx:id="durationTC" prefWidth="140.0" text="Duration" />
+            <TableColumn fx:id="doctorIdTC" prefWidth="161.0" text="Doctor ID" />
         </columns>
       </TableView>
       <Button layoutX="349.0" layoutY="402.0" mnemonicParsing="false" onAction="#backToDashboardButtonOA" text="Back to Dashboard" />

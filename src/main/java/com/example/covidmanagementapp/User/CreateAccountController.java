@@ -1,6 +1,6 @@
 package com.example.covidmanagementapp.User;
 
-import com.example.covidmanagementapp.Ashraf.AppendableObjectOutputStream;
+import com.example.covidmanagementapp.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -30,18 +30,9 @@ public class CreateAccountController
 
     @javafx.fxml.FXML
     public void initialize() {
-        userCB.getItems().addAll(
-                "Doctor",
-                "Patient",
-                "Pharmacy",
-                "Operator",
-                "Lab Technician",
-                "Vaccination Staff",
-                "Emergency Staff",
-                "Nurse"
-        );
-        UserFile.loadUsers();
+        userCB.getItems().addAll("Doctor", "Patient", "Pharmacy", "Health Data Entry Operator", "Lab Technician", "Vaccination Staff", "Emergency Ambulance Staff", "Nurse");
 
+        UserFile.loadUsers();
     }
 
     @javafx.fxml.FXML
@@ -52,20 +43,19 @@ public class CreateAccountController
             String password = passwordPF.getText();
             String role = userCB.getValue();
 
-
             if (name.isEmpty() || password.isEmpty() || role == null) {
                 notificationLabel.setText("Fill all fields!");
                 return;
             }
 
-
-            for (var u : UserFile.userList) {
+            for (User u : UserFile.userList) {
                 if (u.getUserId() == id) {
-                    notificationLabel.setText("User ID already exists!");
+                    notificationLabel.setText("ID already exists!");
                     return;
                 }
             }
-            User newUser = new User(id, password, role);
+
+            User newUser = new User(id, password, role, name);
 
             File f = new File("users.bin");
             ObjectOutputStream oos;
@@ -81,28 +71,24 @@ public class CreateAccountController
 
             UserFile.userList.add(newUser);
 
-            notificationLabel.setText("Account created successfully!");
+            notificationLabel.setText("Account Created!");
 
         } catch (Exception e) {
-            notificationLabel.setText("ID must be a number!");
+            notificationLabel.setText("Invalid Input!");
         }
 
     }
 
-
     @javafx.fxml.FXML
     public void backToLoginButtonOA(ActionEvent actionEvent) {
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/covidmanagementapp/Login.fxml"));
-
-            Scene loginScene = new Scene(fxmlLoader.load());
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/User/loginView.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
             Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-            stage.setTitle("Covid Management App");
-            stage.setScene(loginScene);
+            stage.setScene(scene);
             stage.show();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             //
         }
     }

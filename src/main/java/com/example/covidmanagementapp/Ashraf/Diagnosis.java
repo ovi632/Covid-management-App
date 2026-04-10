@@ -1,22 +1,34 @@
 package com.example.covidmanagementapp.Ashraf;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Diagnosis {
-    private String patientName, doctorId, symptoms, diagnosisDetails, prescribedMedicine, dosage, severityLevel;
-    private int registrationId;
-    private LocalDate visitDate;
+public class Diagnosis implements Serializable {
+private int patientId;
+    private String patientName;
+    private int doctorId;
+    private String symptoms;
+    private String diagnosisDetails;
+    private String severity;
+    private String dosage;
+    private String date;
 
-    public Diagnosis(String patientName, String doctorId, String symptoms, String diagnosisDetails, String prescribedMedicine, String dosage, String severityLevel, int registrationId, LocalDate visitDate) {
+    public Diagnosis(int patientId, String patientName, int doctorId, String symptoms, String diagnosisDetails, String severity, String dosage, String date) {
+        this.patientId = patientId;
         this.patientName = patientName;
         this.doctorId = doctorId;
         this.symptoms = symptoms;
         this.diagnosisDetails = diagnosisDetails;
-        this.prescribedMedicine = prescribedMedicine;
+        this.severity = severity;
         this.dosage = dosage;
-        this.severityLevel = severityLevel;
-        this.registrationId = registrationId;
-        this.visitDate = visitDate;
+        this.date = date;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public String getPatientName() {
@@ -27,11 +39,11 @@ public class Diagnosis {
         this.patientName = patientName;
     }
 
-    public String getDoctorId() {
+    public int getDoctorId() {
         return doctorId;
     }
 
-    public void setDoctorId(String doctorId) {
+    public void setDoctorId(int doctorId) {
         this.doctorId = doctorId;
     }
 
@@ -51,12 +63,12 @@ public class Diagnosis {
         this.diagnosisDetails = diagnosisDetails;
     }
 
-    public String getPrescribedMedicine() {
-        return prescribedMedicine;
+    public String getSeverity() {
+        return severity;
     }
 
-    public void setPrescribedMedicine(String prescribedMedicine) {
-        this.prescribedMedicine = prescribedMedicine;
+    public void setSeverity(String severity) {
+        this.severity = severity;
     }
 
     public String getDosage() {
@@ -67,42 +79,25 @@ public class Diagnosis {
         this.dosage = dosage;
     }
 
-    public String getSeverityLevel() {
-        return severityLevel;
+    public String getDate() {
+        return date;
     }
 
-    public void setSeverityLevel(String severityLevel) {
-        this.severityLevel = severityLevel;
-    }
-
-    public int getRegistrationId() {
-        return registrationId;
-    }
-
-    public void setRegistrationId(int registrationId) {
-        this.registrationId = registrationId;
-    }
-
-    public LocalDate getVisitDate() {
-        return visitDate;
-    }
-
-    public void setVisitDate(LocalDate visitDate) {
-        this.visitDate = visitDate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return "Diagnosis{" +
-                "patientName='" + patientName + '\'' +
-                ", doctorId='" + doctorId + '\'' +
+                "patientId=" + patientId +
+                ", patientName='" + patientName + '\'' +
+                ", doctorId=" + doctorId +
                 ", symptoms='" + symptoms + '\'' +
                 ", diagnosisDetails='" + diagnosisDetails + '\'' +
-                ", prescribedMedicine='" + prescribedMedicine + '\'' +
+                ", severity='" + severity + '\'' +
                 ", dosage='" + dosage + '\'' +
-                ", severityLevel='" + severityLevel + '\'' +
-                ", registrationId=" + registrationId +
-                ", visitDate=" + visitDate +
+                ", date='" + date + '\'' +
                 '}';
     }
 }

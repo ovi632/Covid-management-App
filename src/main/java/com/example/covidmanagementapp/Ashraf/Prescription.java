@@ -1,21 +1,36 @@
 package com.example.covidmanagementapp.Ashraf;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Prescription {
-    private String patientName , medicineName , dosage , instructions;
-    private int registrationId , duration , doctorId;
-    private LocalDate createdDate;
+public class Prescription implements Serializable {
 
-    public Prescription(String patientName, String medicineName, String dosage, String instructions, int registrationId, int duration, int doctorId, LocalDate createdDate) {
+    private int patientId;
+    private String patientName;
+    private int doctorId;
+    private String medicineName;
+    private String dosage;
+    private String duration;
+    private String instructions;
+    private String date;
+
+    public Prescription(int patientId, String patientName, int doctorId, String medicineName, String dosage, String duration, String instructions, String date) {
+        this.patientId = patientId;
         this.patientName = patientName;
+        this.doctorId = doctorId;
         this.medicineName = medicineName;
         this.dosage = dosage;
-        this.instructions = instructions;
-        this.registrationId = registrationId;
         this.duration = duration;
-        this.doctorId = doctorId;
-        this.createdDate = createdDate;
+        this.instructions = instructions;
+        this.date = date;
+
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public String getPatientName() {
@@ -24,6 +39,14 @@ public class Prescription {
 
     public void setPatientName(String patientName) {
         this.patientName = patientName;
+    }
+
+    public int getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(int doctorId) {
+        this.doctorId = doctorId;
     }
 
     public String getMedicineName() {
@@ -42,6 +65,14 @@ public class Prescription {
         this.dosage = dosage;
     }
 
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
     public String getInstructions() {
         return instructions;
     }
@@ -50,50 +81,25 @@ public class Prescription {
         this.instructions = instructions;
     }
 
-    public int getRegistrationId() {
-        return registrationId;
+    public String getDate() {
+        return date;
     }
 
-    public void setRegistrationId(int registrationId) {
-        this.registrationId = registrationId;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public int getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
-    }
-
-    public LocalDate getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return "Prescription{" +
-                "patientName='" + patientName + '\'' +
+                "patientId=" + patientId +
+                ", patientName='" + patientName + '\'' +
+                ", doctorId=" + doctorId +
                 ", medicineName='" + medicineName + '\'' +
                 ", dosage='" + dosage + '\'' +
+                ", duration='" + duration + '\'' +
                 ", instructions='" + instructions + '\'' +
-                ", registrationId=" + registrationId +
-                ", duration=" + duration +
-                ", doctorId=" + doctorId +
-                ", createdDate=" + createdDate +
+                ", date='" + date + '\'' +
                 '}';
     }
-
 }
