@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Kumkum.LabResultEntryController">
    <top>
       <HBox prefHeight="37.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -40,10 +40,10 @@
                   </VBox>
                </children>
             </VBox>
-            <Button mnemonicParsing="false" text="My Assigned Tests" />
-            <Button mnemonicParsing="false" text="Lab Inventory " />
-            <Button mnemonicParsing="false" text="Statistics" />
-            <Button mnemonicParsing="false" text="Positive Cases" />
+            <Button fx:id="assignedTestsBtn" mnemonicParsing="false" text="My Assigned Tests" />
+            <Button fx:id="inventoryBtn" mnemonicParsing="false" text="Lab Inventory " />
+            <Button fx:id="statisticsBtn" mnemonicParsing="false" text="Statistics" />
+            <Button fx:id="positiveCasesBtn" mnemonicParsing="false" text="Positive Cases" />
             <Label prefHeight="18.0" prefWidth="101.0" />
          </children>
          <padding>
@@ -54,7 +54,7 @@
    <center>
       <VBox prefHeight="314.0" prefWidth="465.0" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="20.0" prefWidth="204.0" text="Result Entry For : John Doe">
+            <Label fx:id="patientNameLabel" prefHeight="20.0" prefWidth="204.0" text="Result Entry For : John Doe">
                <font>
                   <Font size="16.0" />
                </font>
@@ -80,14 +80,14 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <TextField GridPane.columnIndex="1" />
+                        <TextField fx:id="ctValueTextField" GridPane.columnIndex="1" />
                         <Label prefHeight="20.0" prefWidth="127.0" text="      Select Result" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox prefWidth="150.0" promptText="Positive / Negative" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" text="Submit Result" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="resultComboBox" prefWidth="150.0" promptText="Positive / Negative" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="submitResultBtn" mnemonicParsing="false" onAction="#onSubmitResultClicked" text="Submit Result" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>
