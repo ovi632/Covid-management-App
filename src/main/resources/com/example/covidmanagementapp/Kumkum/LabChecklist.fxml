@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="BorderPane" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Kumkum.LabChecklistController">
    <top>
       <HBox prefHeight="37.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -36,9 +36,9 @@
                   </VBox>
                </children>
             </VBox>
-            <Label prefHeight="18.0" prefWidth="101.0" text="Name : John Doe" />
-            <Label text="Status : Pending" />
-            <Label text="Lab Test : Negative" />
+            <Label fx:id="patientNameLabel" prefHeight="18.0" prefWidth="101.0" text="Name : John Doe" />
+            <Label fx:id="testStatus" text="Status : Pending" />
+            <Label fx:id="testResult" text="Lab Test : Negative" />
          </children>
          <padding>
             <Insets left="20.0" top="15.0" />
@@ -50,12 +50,12 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
                <children>
-                  <CheckBox mnemonicParsing="false" text="Wear N95 Mask " />
-                  <CheckBox mnemonicParsing="false" text="Wear Protective Gloves" />
-                  <CheckBox mnemonicParsing="false" text="PPE " />
-                  <CheckBox mnemonicParsing="false" text="Wear Eye Protection" />
-                  <CheckBox mnemonicParsing="false" text="Sanitize Workstation" />
-                  <Button mnemonicParsing="false" text="Start Sample Collection" />
+                  <CheckBox fx:id="maskCb" mnemonicParsing="false" text="Wear N95 Mask " />
+                  <CheckBox fx:id="gloveCb" mnemonicParsing="false" text="Wear Protective Gloves" />
+                  <CheckBox fx:id="ppeCb" mnemonicParsing="false" text="PPE " />
+                  <CheckBox fx:id="eyeCb" mnemonicParsing="false" text="Wear Eye Protection" />
+                  <CheckBox fx:id="sanitizeCb" mnemonicParsing="false" text="Sanitize Workstation" />
+                  <Button fx:id="btnStartCollection" mnemonicParsing="false" onAction="#onStartClicked" text="Start Sample Collection" />
                </children>
                <VBox.margin>
                   <Insets right="20.0" top="20.0" />
@@ -64,4 +64,4 @@
          </children>
       </VBox>
    </center>
-</BorderPane>
+</fx:root>

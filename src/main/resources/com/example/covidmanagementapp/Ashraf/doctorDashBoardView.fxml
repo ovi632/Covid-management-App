@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="499.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Ashraf.DoctorDashboardViewController">
+   <children>
+      <Button layoutX="29.0" layoutY="23.0" mnemonicParsing="false" onAction="#patientInfoButtonOA" prefHeight="26.0" prefWidth="219.0" text="Patient Information" />
+      <Button layoutX="29.0" layoutY="62.0" mnemonicParsing="false" onAction="#addDiagnosisButtonOA" prefHeight="26.0" prefWidth="219.0" text="Add Diagnosis" />
+      <Button layoutX="29.0" layoutY="100.0" mnemonicParsing="false" onAction="#digitalPrescriptionButtonOA" prefHeight="26.0" prefWidth="219.0" text="Digital Prescription" />
+      <Button layoutX="29.0" layoutY="136.0" mnemonicParsing="false" onAction="#covidStatisticsButtonOA" prefHeight="26.0" prefWidth="219.0" text="Covid Statistics" />
+      <Button layoutX="29.0" layoutY="176.0" mnemonicParsing="false" onAction="#updateRecoveryStatusButtonOA" prefHeight="26.0" prefWidth="219.0" text="Update Recovery Status" />
+      <Button layoutX="29.0" layoutY="216.0" mnemonicParsing="false" onAction="#folloupButtonOA" prefHeight="26.0" prefWidth="219.0" text="Follow- Up Manager" />
+      <Button layoutX="29.0" layoutY="250.0" mnemonicParsing="false" onAction="#quarantineInstructionsButtonOA" prefHeight="26.0" prefWidth="219.0" text="Quarantine Instructions" />
+      <Button layoutX="29.0" layoutY="289.0" mnemonicParsing="false" onAction="#updateCovidCaseStatusButtonOA" prefHeight="26.0" prefWidth="219.0" text="Update Covid Case Status" />
+      <Button layoutX="191.0" layoutY="459.0" mnemonicParsing="false" onAction="#logOutButtonOA" prefHeight="26.0" prefWidth="219.0" text="Log Out" />
+   </children>
+</AnchorPane>

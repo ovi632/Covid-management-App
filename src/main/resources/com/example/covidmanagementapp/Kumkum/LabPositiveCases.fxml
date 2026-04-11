@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Kumkum.LabPositiveCasesController">
    <top>
       <HBox prefHeight="0.0" prefWidth="666.0" BorderPane.alignment="CENTER">
          <children>
@@ -33,14 +33,14 @@
                         <Insets bottom="8.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                      <children>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="My Assigned Tests">
+                        <Button fx:id="assignedTestsBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAssignedTestsBtnClicked" prefHeight="26.0" prefWidth="180.0" text="My Assigned Tests">
                            <padding>
                               <Insets left="15.0" />
                            </padding>
                         </Button>
                      </children>
                   </VBox>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="28.0" prefWidth="132.0" text="Lab Inventory" VBox.vgrow="ALWAYS">
+                  <Button fx:id="inventoryBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onInventoryBtnClicked" prefHeight="28.0" prefWidth="132.0" text="Lab Inventory" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets bottom="8.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -48,7 +48,7 @@
                         <Insets left="15.0" />
                      </padding>
                   </Button>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="29.0" prefWidth="132.0" text="Statistics" VBox.vgrow="ALWAYS">
+                  <Button fx:id="statisticsBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStatisticsBtnClicked" prefHeight="29.0" prefWidth="132.0" text="Statistics" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets bottom="8.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -56,7 +56,7 @@
                         <Insets left="15.0" />
                      </padding>
                   </Button>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="31.0" prefWidth="132.0" text="Positive Cases" VBox.vgrow="ALWAYS">
+                  <Button fx:id="positiveCasesBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPositiveCaseBtnClicked" prefHeight="31.0" prefWidth="132.0" text="Positive Cases" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets bottom="8.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -77,15 +77,8 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label prefHeight="137.0" prefWidth="462.0" text="Total Positive Cases Detected Today : 24" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets left="20.0" top="20.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="186.0" text="Refresh">
+                  <Label fx:id="totalpositiveLabel" prefHeight="31.0" prefWidth="312.0" text="Total Covid Positive : 24" />
+                  <Button fx:id="refreshBtn" mnemonicParsing="false" onAction="#onRefreshBtnClicked" prefHeight="46.0" prefWidth="186.0" text="Refresh">
                      <VBox.margin>
                         <Insets left="20.0" top="20.0" />
                      </VBox.margin>

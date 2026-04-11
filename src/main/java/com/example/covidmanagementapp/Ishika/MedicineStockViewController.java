@@ -1,33 +1,37 @@
 package com.example.covidmanagementapp.Ishika;
 
+import com.example.covidmanagementapp.HelloApplication;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
+import javafx.stage.Stage;
 
 public class MedicineStockViewController
 {
     @javafx.fxml.FXML
-    private TableColumn medicineNameTC;
-    @javafx.fxml.FXML
-    private Button backButtonOA;
-    @javafx.fxml.FXML
-    private TableColumn stockAlertTC;
-    @javafx.fxml.FXML
-    private TextField maximumRangeTF;
-    @javafx.fxml.FXML
-    private TableView medicineStockViewTV;
-    @javafx.fxml.FXML
-    private TextField minimumRangeTF;
-    @javafx.fxml.FXML
-    private TableColumn quantityTC;
+    private PieChart medicineStockPieChart;
 
     @javafx.fxml.FXML
     public void initialize() {
     }
 
     @javafx.fxml.FXML
-    public void searchButtonOA(ActionEvent actionEvent) {
+    public void backButtonOA(ActionEvent actionEvent) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ishika/pharmacyDashboardView.fxml"));
+            Scene medicineAvailabilityViewScene = new Scene(fxmlLoader.load());
+            Stage medicineAvailabilityViewStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            medicineAvailabilityViewStage.setTitle("Pharmacy Dashboard");
+            medicineAvailabilityViewStage.setScene(medicineAvailabilityViewScene);
+            medicineAvailabilityViewStage.show();
+        }catch (Exception e){
+            //
+        }
+    }
+
+    @javafx.fxml.FXML
+    public void viewMedicineStockPieChartButtonOA(ActionEvent actionEvent) {
     }
 }

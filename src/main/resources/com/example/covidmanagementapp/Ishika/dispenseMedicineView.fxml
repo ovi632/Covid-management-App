@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="551.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Ishika.DispenseMedicineController">
+<AnchorPane prefHeight="551.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Ishika.DispenseMedicineViewController">
    <children>
       <TextField fx:id="patientNameTF" layoutX="43.0" layoutY="42.0" promptText="Enter Patient Name" />
       <TextField fx:id="registrationIdTF" layoutX="43.0" layoutY="80.0" promptText="Enter Registration ID" />
