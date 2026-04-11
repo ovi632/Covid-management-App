@@ -49,14 +49,10 @@ public class LabChecklistController {
 
 
             try {
-                // 1. Load the new FXML file
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/covidmanagementapp/Kumkum/LabResultEntry.fxml"));
                 Parent root = loader.load();
-
-                // 2. Get the current window (Stage) using the button
                 Stage stage = (Stage) btnStartCollection.getScene().getWindow();
-
-                // 3. Switch the scene
                 stage.setScene(new Scene(root));
                 stage.setTitle("Result Entry");
                 stage.show();

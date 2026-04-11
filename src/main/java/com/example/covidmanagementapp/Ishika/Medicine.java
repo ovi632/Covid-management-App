@@ -1,34 +1,49 @@
 package com.example.covidmanagementapp.Ishika;
 
-public class Medicine {
+import java.io.Serializable;
+
+public class Medicine implements Serializable {
 
     private String name;
     private int quantity;
+    private String status;
 
-    // Constructor
-    public Medicine(String name, int quantity) {
+    public Medicine(String name, int quantity, String status) {
         this.name = name;
         this.quantity = quantity;
+        this.status = status;
     }
 
-    // Getter for name
     public String getName() {
         return name;
     }
 
-    // Getter for quantity
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getQuantity() {
         return quantity;
     }
 
-    // Auto-calculated status
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public String getStatus() {
-        if (quantity == 0) {
-            return "Out of Stock";
-        } else if (quantity < 15) {
-            return "Low Stock";
-        } else {
-            return "Available";
-        }
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Medicine{" +
+                "name='" + name + '\'' +
+                ", quantity=" + quantity +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

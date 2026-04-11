@@ -33,19 +33,73 @@ public class AddPatientDataViewController
 
     @javafx.fxml.FXML
     public void backbuttonOA(ActionEvent actionEvent) {
-        try {
+        try{
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ishika/healthDataEntryOperatorDashboardView.fxml"));
-            Scene addPatientDataViewScene = new Scene(fxmlLoader.load());
-            Stage addPatientDataViewStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-            addPatientDataViewStage.setTitle("");
-            addPatientDataViewStage.setScene(addPatientDataViewScene);
-            addPatientDataViewStage.show();
+            Scene updatePatientRecordViewScene = new Scene(fxmlLoader.load());
+            Stage updatePatientRecordViewStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            updatePatientRecordViewStage.setTitle("health DataEntry Operator DashboardView");
+            updatePatientRecordViewStage.setScene(updatePatientRecordViewScene);
+            updatePatientRecordViewStage.show();
         }catch (Exception e){
             //
         }
+
     }
 
     @javafx.fxml.FXML
     public void saveButtonOA(ActionEvent actionEvent) {
+        try {
+
+            String name = patientNameTF.getText().trim();
+            String ageText = ageTF.getText().trim();
+            String phone = phoneNumberTF.getText().trim();
+            String address = addressTF.getText().trim();
+
+            if (name.isEmpty() || ageText.isEmpty() ||
+                    phone.isEmpty() || address.isEmpty()) {
+
+                notificationLabel.setText("Fill all fields!");
+                return;
+            }
+
+            if (!maleRadioButton.isSelected() && !femaleRadioButton.isSelected()) {
+                notificationLabel.setText("Select gender!");
+                return;
+            }
+
+            int age = Integer.parseInt(ageText);
+
+            String gender = maleRadioButton.isSelected() ? "Male" : "Female";
+
+            PatientData p = new PatientData(name, age, gender, phone, address);
+
+            java.io.File file = new java.io.File("PatientData.bin");
+            java.io.ObjectOutputStream oos;
+
+            if (file.exists()) {
+                oos = new com.example.covidmanagementapp.util.AppendableObjectOutputStream(
+                        new java.io.FileOutputStream(file, true)
+                );
+            } else {
+                oos = new java.io.ObjectOutputStream(
+                        new java.io.FileOutputStream(file)
+                );
+            }
+
+            oos.writeObject(p);
+            oos.close();
+
+            notificationLabel.setText("Patient Data Saved!");
+
+            patientNameTF.clear();
+            ageTF.clear();
+            phoneNumberTF.clear();
+            addressTF.clear();
+            maleRadioButton.setSelected(false);
+            femaleRadioButton.setSelected(false);
+
+        } catch (Exception e) {
+            notificationLabel.setText("Error saving data!");
+        }
     }
 }

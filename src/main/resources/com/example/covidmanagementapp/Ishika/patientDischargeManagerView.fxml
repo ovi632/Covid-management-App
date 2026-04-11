@@ -9,18 +9,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="552.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Ishika.PatientDischargeManagerViewController">
    <children>
-      <TextField fx:id="patientNameTF" layoutX="21.0" layoutY="30.0" promptText="Patient Name" />
-      <TextField fx:id="registrationIDTF" layoutX="186.0" layoutY="30.0" promptText="RegistrationID" />
+      <TextField fx:id="registrationIDTF" layoutX="63.0" layoutY="30.0" prefHeight="26.0" prefWidth="250.0" promptText="RegistrationID" />
       <Button layoutX="353.0" layoutY="30.0" mnemonicParsing="false" onAction="#verifyPatientButtonOA" text="Verify Patient" />
       <Label fx:id="notificationLabel" layoutX="451.0" layoutY="10.0" prefHeight="98.0" prefWidth="250.0" />
       <DatePicker fx:id="dischargeDateDP" layoutX="174.0" layoutY="111.0" />
       <Label layoutX="52.0" layoutY="115.0" text="Discharge Date:" />
       <Label layoutX="52.0" layoutY="153.0" text="Discharge Status:" />
       <ComboBox fx:id="dischargeStatusCB" layoutX="174.0" layoutY="149.0" prefWidth="150.0" />
-      <TextField fx:id="dischargeSummaryTF" layoutX="174.0" layoutY="201.0" />
+      <TextField fx:id="dischargeSummaryTF" layoutX="169.0" layoutY="188.0" />
       <Button layoutX="392.0" layoutY="214.0" mnemonicParsing="false" onAction="#saveDischargeButtonOA" text="Save Discharge" />
       <Button layoutX="534.0" layoutY="214.0" mnemonicParsing="false" onAction="#loadDischargeHistoryButtonOA" text="Load Discharge History" />
       <TableView fx:id="patientDischargeManagerViewTV" layoutX="27.0" layoutY="268.0" prefHeight="186.0" prefWidth="661.0">
@@ -32,6 +30,8 @@
         </columns>
       </TableView>
       <Button layoutX="604.0" layoutY="488.0" mnemonicParsing="false" onAction="#backButtonOA" prefHeight="26.0" prefWidth="87.0" text="Back" />
-      <Label layoutX="52.0" layoutY="205.0" text="Discharge Summary:" />
+      <Label layoutX="47.0" layoutY="192.0" text="Discharge Summary:" />
+      <Label layoutX="47.0" layoutY="231.0" text="Ward" />
+      <ComboBox fx:id="wardCB" layoutX="169.0" layoutY="227.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

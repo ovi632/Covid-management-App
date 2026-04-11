@@ -1,6 +1,7 @@
 package com.example.covidmanagementapp.Ashraf;
 
 import com.example.covidmanagementapp.HelloApplication;
+import com.example.covidmanagementapp.User.UserFile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,6 +10,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class LabTestRequestViewController
 {
@@ -46,8 +53,8 @@ public class LabTestRequestViewController
                 return;
             }
 
-            java.time.LocalDate selectedDate = peferredTestDatePicker.getValue();
-            java.time.LocalDate today = java.time.LocalDate.now();
+            LocalDate selectedDate = peferredTestDatePicker.getValue();
+            LocalDate today = LocalDate.now();
 
             long daysBetween = java.time.temporal.ChronoUnit.DAYS.between(today, selectedDate);
 
@@ -56,7 +63,31 @@ public class LabTestRequestViewController
                 return;
             }
 
-            notificationLabel.setText("Lab Test Booked ");
+            int patientId = UserFile.currentUser.getUserId();
+
+            LabTest test = new LabTest(
+                    testTypeCB.getValue(),
+                    preferredTestSlotCB.getValue(),
+                    labLocationCB.getValue(),
+                    selectedDate.toString(),
+                    patientId
+            );
+
+            File file = new File("LabTest.bin");
+            ObjectOutputStream oos;
+
+            if (file.exists()) {
+                oos = new com.example.covidmanagementapp.util.AppendableObjectOutputStream(
+                        new FileOutputStream(file, true)
+                );
+            } else {
+                oos = new ObjectOutputStream(new FileOutputStream(file));
+            }
+
+            oos.writeObject(test);
+            oos.close();
+
+            notificationLabel.setText("Lab Test Booked & Saved ");
 
             testTypeCB.setValue(null);
             preferredTestSlotCB.setValue(null);

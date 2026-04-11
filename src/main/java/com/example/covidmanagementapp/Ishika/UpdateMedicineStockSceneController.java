@@ -10,6 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+
 public class UpdateMedicineStockSceneController
 {
 
@@ -26,6 +31,7 @@ public class UpdateMedicineStockSceneController
 
     @javafx.fxml.FXML
     public void initialize() {
+        datePicker.setValue(LocalDate.now());
     }
 
     @javafx.fxml.FXML
@@ -44,5 +50,46 @@ public class UpdateMedicineStockSceneController
 
     @javafx.fxml.FXML
     public void saveButtonOA(ActionEvent actionEvent) {
+        try {
+
+            if (medicineNameTF.getText().trim().isEmpty() ||
+                    quantityTF.getText().trim().isEmpty() ||
+                    datePicker.getValue() == null) {
+
+                notificationLabel.setText("Fill all fields!");
+                return;
+            }
+
+            String name = medicineNameTF.getText().trim();
+            int qty = Integer.parseInt(quantityTF.getText().trim());
+            String date = datePicker.getValue().toString();
+
+            MedicineStock ms = new MedicineStock(name, qty, date);
+
+            File file = new File("MedicineStock.bin");
+            ObjectOutputStream oos;
+
+            if (file.exists()) {
+                oos = new com.example.covidmanagementapp.util.AppendableObjectOutputStream(
+                        new FileOutputStream(file, true)
+                );
+            } else {
+                oos = new ObjectOutputStream(new FileOutputStream(file));
+            }
+
+            oos.writeObject(ms);
+            oos.close();
+
+            notificationLabel.setText("Stock Updated!");
+
+            medicineNameTF.clear();
+            quantityTF.clear();
+            datePicker.setValue(LocalDate.now());
+
+        } catch (Exception e) {
+            notificationLabel.setText("Error!");
+        }
     }
+
 }
+

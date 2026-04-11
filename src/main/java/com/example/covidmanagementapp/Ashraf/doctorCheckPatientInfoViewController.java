@@ -1,6 +1,8 @@
 package com.example.covidmanagementapp.Ashraf;
 
 import com.example.covidmanagementapp.HelloApplication;
+import com.example.covidmanagementapp.User.User;
+import com.example.covidmanagementapp.User.UserFile;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 
 public class doctorCheckPatientInfoViewController
 {
@@ -33,14 +40,18 @@ public class doctorCheckPatientInfoViewController
 
     @javafx.fxml.FXML
     public void initialize() {
-        nameInPatientInfoTC.setCellValueFactory(
-                new javafx.scene.control.cell.PropertyValueFactory<>("name"));
+        nameInPatientInfoTC.setCellValueFactory(c ->
+                new javafx.beans.property.SimpleStringProperty(c.getValue().getName()));
 
-        ageInPatientInfoTC.setCellValueFactory(
-                new javafx.scene.control.cell.PropertyValueFactory<>("age"));
+        ageInPatientInfoTC.setCellValueFactory(c ->
+                new javafx.beans.property.SimpleObjectProperty<>(c.getValue().getAge()));
 
-        genderInPatientInfoTC.setCellValueFactory(
-                new javafx.scene.control.cell.PropertyValueFactory<>("gender"));
+        genderInPatientInfoTC.setCellValueFactory(c ->
+                new javafx.beans.property.SimpleStringProperty(c.getValue().getGender()));
+
+        previousDiagnosesInPatientInfoTC.setCellValueFactory(c ->
+                new javafx.beans.property.SimpleStringProperty(c.getValue().getDisease()));
+
     }
 
     @javafx.fxml.FXML
@@ -60,19 +71,59 @@ public class doctorCheckPatientInfoViewController
     @javafx.fxml.FXML
     public void SearchButtonOA(ActionEvent actionEvent) {
         try {
-            int id = Integer.parseInt(registrationIdTF.getText());
+            String idText = registrationIdTF.getText().trim();
 
-            PatientFile.loadPatients();
+            if (idText.isEmpty()) {
+                notificationLabel.setText("Enter ID!");
+                return;
+            }
 
-            patientInfoTableView.getItems().clear();
+            int id = Integer.parseInt(idText);
 
-            for (Patient p : PatientFile.patientList) {
+            UserFile.loadUsers();
 
-                if (p.getId() == id) {
+            for (User u : UserFile.userList) {
 
+                if (u.getUserId() == id) {
+
+                    String name = u.getName();
+
+
+                    int age = 25;
+                    String gender = "Male";
+
+                    String disease = "No Diagnosis Found";
+
+                    File file = new File("Diagnosis.bin");
+
+                    if (file.exists()) {
+
+                        ObjectInputStream ois =
+                                new ObjectInputStream(new FileInputStream(file));
+
+                        while (true) {
+                            try {
+                                Diagnosis d = (Diagnosis) ois.readObject();
+
+                                if (d.getPatientId() == id) {
+                                    disease = d.getDiagnosisDetails();
+                                }
+
+                            } catch (EOFException e) {
+                                break;
+                            }
+                        }
+
+                        ois.close();
+                    }
+
+                    patientInfoTableView.getItems().clear();
+
+                    Patient p = new Patient(id, name, age, gender, disease);
                     patientInfoTableView.getItems().add(p);
 
-                    notificationLabel.setText("Patient Found!");
+                    notificationLabel.setText("Patient Loaded!");
+                    registrationIdTF.clear();
                     return;
                 }
             }
@@ -80,9 +131,11 @@ public class doctorCheckPatientInfoViewController
             notificationLabel.setText("Patient not found!");
 
         } catch (Exception e) {
-            notificationLabel.setText("Enter valid ID!");
+            notificationLabel.setText("Invalid ID!");
         }
 
+
     }
+
 
 }

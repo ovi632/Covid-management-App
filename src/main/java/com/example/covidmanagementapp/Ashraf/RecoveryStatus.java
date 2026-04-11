@@ -1,19 +1,31 @@
 package com.example.covidmanagementapp.Ashraf;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 
-public class RecoveryStatus {
-    private String patientName , recoveryStatus ,doctorNotes;
-    private int registrationId , doctorId ;
-    private LocalDate statusUpdateDate;
+public class RecoveryStatus implements Serializable {
 
-    public RecoveryStatus(String patientName, String recoveryStatus, String doctorNotes, int registrationId, int doctorId, LocalDate statusUpdateDate) {
+    private int patientId;
+    private String patientName;
+    private String status;
+    private String notes;
+    private String date;
+    private int doctorId;
+
+    public RecoveryStatus(int patientId, String patientName, String status, String notes, String date, int doctorId) {
+        this.patientId = patientId;
         this.patientName = patientName;
-        this.recoveryStatus = recoveryStatus;
-        this.doctorNotes = doctorNotes;
-        this.registrationId = registrationId;
+        this.status = status;
+        this.notes = notes;
+        this.date = date;
         this.doctorId = doctorId;
-        this.statusUpdateDate = statusUpdateDate;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
     public String getPatientName() {
@@ -24,28 +36,28 @@ public class RecoveryStatus {
         this.patientName = patientName;
     }
 
-    public String getRecoveryStatus() {
-        return recoveryStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRecoveryStatus(String recoveryStatus) {
-        this.recoveryStatus = recoveryStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getDoctorNotes() {
-        return doctorNotes;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setDoctorNotes(String doctorNotes) {
-        this.doctorNotes = doctorNotes;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
-    public int getRegistrationId() {
-        return registrationId;
+    public String getDate() {
+        return date;
     }
 
-    public void setRegistrationId(int registrationId) {
-        this.registrationId = registrationId;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getDoctorId() {
@@ -56,23 +68,15 @@ public class RecoveryStatus {
         this.doctorId = doctorId;
     }
 
-    public LocalDate getStatusUpdateDate() {
-        return statusUpdateDate;
-    }
-
-    public void setStatusUpdateDate(LocalDate statusUpdateDate) {
-        this.statusUpdateDate = statusUpdateDate;
-    }
-
     @Override
     public String toString() {
         return "RecoveryStatus{" +
-                "patientName='" + patientName + '\'' +
-                ", recoveryStatus='" + recoveryStatus + '\'' +
-                ", doctorNotes='" + doctorNotes + '\'' +
-                ", registrationId=" + registrationId +
+                "patientId=" + patientId +
+                ", patientName='" + patientName + '\'' +
+                ", status='" + status + '\'' +
+                ", notes='" + notes + '\'' +
+                ", date='" + date + '\'' +
                 ", doctorId=" + doctorId +
-                ", statusUpdateDate=" + statusUpdateDate +
                 '}';
     }
 }

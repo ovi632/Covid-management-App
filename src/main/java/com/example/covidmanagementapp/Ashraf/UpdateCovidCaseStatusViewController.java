@@ -1,28 +1,21 @@
 package com.example.covidmanagementapp.Ashraf;
-import com.example.covidmanagementapp.HelloApplication;
-import com.example.covidmanagementapp.User.UserFile;
 
-import javafx.beans.property.SimpleObjectProperty;
+import com.example.covidmanagementapp.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.stage.Stage;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.io.*;
 
 public class UpdateCovidCaseStatusViewController
 {
     @javafx.fxml.FXML
     private Label notificationLabel;
     @javafx.fxml.FXML
-    private TableColumn<Patient,Integer> doctorID;
+    private TableColumn<CovidStatus,Integer> doctorID;
     @javafx.fxml.FXML
     private TextField doctorNotesTF;
     @javafx.fxml.FXML
@@ -30,55 +23,65 @@ public class UpdateCovidCaseStatusViewController
     @javafx.fxml.FXML
     private DatePicker statusUpdateDateDatePicker;
     @javafx.fxml.FXML
-    private TableColumn<Patient, String> UpdateDateTC;
+    private TableColumn<CovidStatus,String>  UpdateDateTC;
     @javafx.fxml.FXML
     private Label infoShowLabel;
     @javafx.fxml.FXML
-    private TableColumn<Patient,String> previousStatusTC;
+    private TableColumn<CovidStatus,String> previousStatusTC;
     @javafx.fxml.FXML
     private ComboBox<String> newCovidStatusComboBox;
     @javafx.fxml.FXML
-    private TableColumn<Patient,String> updateStatusTC;
+    private TableColumn<CovidStatus,String> updateStatusTC;
     @javafx.fxml.FXML
-    private TableView<Patient> updateCovidCaseTV;
+    private TableView<CovidStatus> updateCovidCaseTV;
+    private int currentPatientId = -1;
+    private String currentPatientName = "";
+    private String previousStatus = "Null";
 
     @javafx.fxml.FXML
     public void initialize() {
-        // ComboBox
-        newCovidStatusComboBox.getItems().addAll("Positive", "Negative", "Recovered");
+        newCovidStatusComboBox.getItems().addAll("Positive", "Negative", "Recovered", "Critical");
 
-        // Table columns (from Patient class)
-        previousStatusTC.setCellValueFactory(new PropertyValueFactory<>("disease"));
+        previousStatusTC.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("previousStatus"));
 
-        updateStatusTC.setCellValueFactory(new PropertyValueFactory<>("disease"));
-        UpdateDateTC.setCellValueFactory(cellData -> new SimpleStringProperty(java.time.LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
-        doctorID.setCellValueFactory(cellData -> new SimpleObjectProperty<>(UserFile.currentUser.getUserId()));
+        updateStatusTC.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("newStatus"));
+
+        UpdateDateTC.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("date"));
+
+        doctorID.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("doctorId"));
     }
 
     @javafx.fxml.FXML
     public void loadStatusHistoryButtonOA(ActionEvent actionEvent) {
-
         try {
-            int id = Integer.parseInt(registrationIdTF.getText());
 
-            PatientFile.loadPatients();
+            File file = new File("CovidStatus.bin");
+
+            if (!file.exists()) {
+                notificationLabel.setText("No data!");
+                return;
+            }
+
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
 
             updateCovidCaseTV.getItems().clear();
 
-            for (Patient p : PatientFile.patientList) {
-
-                if (p.getId() == id) {
-
-                    updateCovidCaseTV.getItems().add(p);
+            while (true) {
+                try {
+                    CovidStatus cs = (CovidStatus) ois.readObject();
+                    updateCovidCaseTV.getItems().add(cs);
+                } catch (EOFException e) {
+                    break;
                 }
             }
 
-            notificationLabel.setText("Status loaded!");
+            ois.close();
+
+            notificationLabel.setText("History Loaded!");
 
         } catch (Exception e) {
-            notificationLabel.setText("Enter valid ID!");
+            notificationLabel.setText("Error loading!");
         }
-
     }
 
     @javafx.fxml.FXML
@@ -98,17 +101,28 @@ public class UpdateCovidCaseStatusViewController
     @javafx.fxml.FXML
     public void SearchButtonOA(ActionEvent actionEvent) {
         try {
-            int id = Integer.parseInt(registrationIdTF.getText());
+            String idText = registrationIdTF.getText().trim();
 
-            PatientFile.loadPatients();
+            if (idText.isEmpty()) {
+                notificationLabel.setText("Enter ID!");
+                return;
+            }
 
-            for (Patient p : PatientFile.patientList) {
+            int id = Integer.parseInt(idText);
 
-                if (p.getId() == id) {
+            com.example.covidmanagementapp.User.UserFile.loadUsers();
+
+            for (com.example.covidmanagementapp.User.User u :
+                    com.example.covidmanagementapp.User.UserFile.userList) {
+
+                if (u.getUserId() == id) {
+
+                    currentPatientId = id;
+                    currentPatientName = u.getName();
 
                     infoShowLabel.setText(
-                            "Name: " + p.getName() +
-                                    "\nCurrent Status: " + p.getDisease()
+                            "Name: " + u.getName() +
+                                    "\nRole: " + u.getRole()
                     );
 
                     notificationLabel.setText("Patient Found!");
@@ -119,68 +133,68 @@ public class UpdateCovidCaseStatusViewController
             notificationLabel.setText("Patient not found!");
 
         } catch (Exception e) {
-            notificationLabel.setText("Enter valid ID!");
+            notificationLabel.setText("Invalid ID!");
         }
-
-
     }
 
     @javafx.fxml.FXML
     public void saveStatusButtonOA(ActionEvent actionEvent) {
         try {
 
-            int id = Integer.parseInt(registrationIdTF.getText());
-
-            String newStatus = newCovidStatusComboBox.getValue();
-
-            if (newStatus == null) {
-                notificationLabel.setText("Select a status!");
-                return;
-            }
-            int doctorId = UserFile.currentUser.getUserId();
-
-            PatientFile.loadPatients();
-
-            boolean found = false;
-
-            for (Patient p : PatientFile.patientList) {
-
-                if (p.getId() == id) {
-
-                    p.setDisease(newStatus);
-
-                    found = true;
-                    break;
-                }
-            }
-
-            if (!found) {
-                notificationLabel.setText("Patient not found!");
+            if (currentPatientId == -1) {
+                notificationLabel.setText("Search patient first!");
                 return;
             }
 
-            ObjectOutputStream oos = new ObjectOutputStream(
-                    new FileOutputStream("Patient.bin")
+            if (newCovidStatusComboBox.getValue() == null ||
+                    statusUpdateDateDatePicker.getValue() == null ||
+                    doctorNotesTF.getText().trim().isEmpty()) {
+
+                notificationLabel.setText("Fill all fields!");
+                return;
+            }
+
+            String newStatus = newCovidStatusComboBox.getValue().toString();
+            String date = statusUpdateDateDatePicker.getValue().toString();
+            String notes = doctorNotesTF.getText().trim();
+
+            int doctorId = com.example.covidmanagementapp.User.UserFile.currentUser.getUserId();
+
+            CovidStatus cs = new CovidStatus(
+                    currentPatientId,
+                    previousStatus,
+                    newStatus,
+                    date,
+                    notes,
+                    doctorId
             );
 
-            for (Patient p : PatientFile.patientList) {
-                oos.writeObject(p);
+            File file = new File("CovidStatus.bin");
+            ObjectOutputStream oos;
+
+            if (file.exists()) {
+                oos = new com.example.covidmanagementapp.util.AppendableObjectOutputStream(
+                        new FileOutputStream(file, true)
+                );
+            } else {
+                oos = new ObjectOutputStream(new FileOutputStream(file));
             }
 
+            oos.writeObject(cs);
             oos.close();
 
-            notificationLabel.setText("Updated by Doctor ID: " + doctorId);
+            notificationLabel.setText("Status Saved!");
 
-            updateCovidCaseTV.getItems().clear();
+            registrationIdTF.clear();
+            doctorNotesTF.clear();
+            newCovidStatusComboBox.setValue(null);
+            statusUpdateDateDatePicker.setValue(null);
+            infoShowLabel.setText("");
 
-            for (Patient p : PatientFile.patientList) {
-                if (p.getId() == id) {
-                    updateCovidCaseTV.getItems().add(p);
-                }
-            }
+            currentPatientId = -1;
 
         } catch (Exception e) {
-            notificationLabel.setText("Error! Check input.");
+            notificationLabel.setText("Error saving!");
         }
     }
 }

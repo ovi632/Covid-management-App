@@ -13,9 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.time.LocalDate;
 
 public class UpdateRecoveryStatusViewController
@@ -32,41 +30,43 @@ public class UpdateRecoveryStatusViewController
     private TextField doctorNotes;
     @javafx.fxml.FXML
     private Label infoShowLabel;
+    private String currentPatientName = "";
+    private int currentPatientId = -1;
+
 
     @javafx.fxml.FXML
     public void initialize() {
-
-        newRecoveryStatusCB.getItems().addAll("Recovered", "Not Recovered", "Under Treatment");
+        newRecoveryStatusCB.getItems().addAll(
+                "Recovered",
+                "Under Treatment",
+                "Critical",
+                "Discharged"
+        );
 
         statusUpdateDateDatePicker.setValue(LocalDate.now());
     }
 
     @javafx.fxml.FXML
-    public void backToDashboardButtonOA(ActionEvent actionEvent) {
-
-        try {
-            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ashraf/doctorDashBoardView.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Doctor Dashboard");
-            stage.show();
-
-        } catch (Exception e) {
-            //
-        }
-    }
-
-    @javafx.fxml.FXML
     public void SearchButtonOA(ActionEvent actionEvent) {
         try {
-            int id = Integer.parseInt(registrationIdTF.getText());
+
+            String idText = registrationIdTF.getText().trim();
+
+            if (idText.isEmpty()) {
+                notificationLabel.setText("Enter ID first!");
+                return;
+            }
+
+            int id = Integer.parseInt(idText);
 
             UserFile.loadUsers();
 
             for (User u : UserFile.userList) {
 
-                if (u.getUserId() == id && u.getRole().equals("Patient")) {
+                if (u.getUserId() == id) {
+
+                    currentPatientId = u.getUserId();
+                    currentPatientName = u.getName();
 
                     infoShowLabel.setText(
                             "Name: " + u.getName() +
@@ -79,9 +79,10 @@ public class UpdateRecoveryStatusViewController
             }
 
             notificationLabel.setText("Patient not found!");
+            registrationIdTF.clear();
 
         } catch (Exception e) {
-            notificationLabel.setText("Enter valid ID!");
+            notificationLabel.setText("Invalid ID!");
         }
     }
 
@@ -89,51 +90,90 @@ public class UpdateRecoveryStatusViewController
     public void saveStatusButtonOA(ActionEvent actionEvent) {
         try {
 
-            int patientId = Integer.parseInt(registrationIdTF.getText());
-            int doctorId = UserFile.currentUser.getUserId();
+            if (currentPatientId == -1) {
+                notificationLabel.setText("Search patient first!");
+                return;
+            }
+
+            if (newRecoveryStatusCB.getValue() == null ||
+                    doctorNotes.getText().trim().isEmpty() ||
+                    statusUpdateDateDatePicker.getValue() == null) {
+
+                notificationLabel.setText("Fill all fields!");
+                return;
+            }
 
             String status = newRecoveryStatusCB.getValue();
-            String notes = doctorNotes.getText();
-
-            if (status == null) {
-                notificationLabel.setText("Select recovery status!");
-                return;
-            }
-
-            if (statusUpdateDateDatePicker.getValue() == null) {
-                notificationLabel.setText("Select date!");
-                return;
-            }
-
+            String notes = doctorNotes.getText().trim();
             String date = statusUpdateDateDatePicker.getValue().toString();
 
-            // 🔥 SAVE DATA
-            String fullData = "PatientID: " + patientId +
-                    ", RecoveryStatus: " + status +
-                    ", Notes: " + notes +
-                    ", Date: " + date +
-                    ", DoctorID: " + doctorId;
+            int doctorId = UserFile.currentUser.getUserId();
 
-            ObjectOutputStream oos;
+            RecoveryStatus rs = new RecoveryStatus(
+                    currentPatientId,
+                    currentPatientName,
+                    status,
+                    notes,
+                    date,
+                    doctorId
+            );
+
             File file = new File("RecoveryStatus.bin");
+            ObjectOutputStream oos;
 
             if (file.exists()) {
                 oos = new com.example.covidmanagementapp.util.AppendableObjectOutputStream(
                         new FileOutputStream(file, true)
                 );
             } else {
-                oos = new ObjectOutputStream(
-                        new FileOutputStream(file)
-                );
+                oos = new ObjectOutputStream(new FileOutputStream(file));
             }
 
-            oos.writeObject(fullData);
+            oos.writeObject(rs);
             oos.close();
+     ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+            RecoveryStatus last = null;
 
-            notificationLabel.setText("Recovery Status Saved!");
+            while (true) {
+                try {
+                    last = (RecoveryStatus) ois.readObject();
+                } catch (EOFException e) {
+                    break;
+                }
+            }
+            ois.close();
+
+            infoShowLabel.setText(
+                    "Saved!\nName: " + last.getPatientName() +
+                            "\nID: " + last.getPatientId() +
+                            "\nStatus: " + last.getStatus()
+            );
+
+            registrationIdTF.clear();
+            doctorNotes.clear();
+            newRecoveryStatusCB.setValue(null);
+            statusUpdateDateDatePicker.setValue(null);
+
+            currentPatientId = -1;
+            currentPatientName = "";
 
         } catch (Exception e) {
-            notificationLabel.setText("Error! Check input.");
+            notificationLabel.setText("Error saving!");
         }
     }
+
+    @javafx.fxml.FXML
+    public void backToDashboardButtonOA(ActionEvent actionEvent) {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ashraf/doctorDashBoardView.fxml"));
+            Scene updateRecoveryStatusViewscene = new Scene(fxmlLoader.load());
+            Stage updateRecoveryStatusViewStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            updateRecoveryStatusViewStage.setTitle("Doctor Dashboard");
+            updateRecoveryStatusViewStage.setScene(updateRecoveryStatusViewscene);
+            updateRecoveryStatusViewStage.show();
+        }catch (Exception e){
+            //
+        }
+    }
+
 }

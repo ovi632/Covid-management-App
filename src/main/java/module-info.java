@@ -3,6 +3,7 @@ module com.example.covidmanagementapp {
     requires javafx.fxml;
     requires javafx.graphics;
 
+
     opens com.example.covidmanagementapp to javafx.fxml;
 
     opens com.example.covidmanagementapp.User to javafx.fxml;

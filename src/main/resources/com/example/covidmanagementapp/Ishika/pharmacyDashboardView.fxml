@@ -6,7 +6,7 @@
 <AnchorPane prefHeight="644.0" prefWidth="873.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.covidmanagementapp.Ishika.PharmacyDashboardViewController">
    <children>
       <Button layoutX="25.0" layoutY="30.0" mnemonicParsing="false" onAction="#pharmacyStaffViewPrescriptionButtonOA" prefHeight="26.0" prefWidth="213.0" text="View Prescriptions" />
-      <Button layoutX="25.0" layoutY="67.0" mnemonicParsing="false" onAction="#pharmacyStaffCheckMedicineStockButtonOA" prefHeight="26.0" prefWidth="213.0" text="Check Medicine Stock" />
+      <Button layoutX="25.0" layoutY="67.0" mnemonicParsing="false" onAction="#pharmacyStaffCheckMedicineStockButtonOA" prefHeight="26.0" prefWidth="213.0" text="Medicine Availabillity" />
       <Button layoutX="25.0" layoutY="112.0" mnemonicParsing="false" onAction="#pharmacyStaffDispenseMedicineButtonOA" prefHeight="26.0" prefWidth="213.0" text="Dispense Medicine" />
       <Button layoutX="25.0" layoutY="161.0" mnemonicParsing="false" onAction="#pharmacyStaffUpdateStockButtonOA" prefHeight="26.0" prefWidth="213.0" text="Update Stock" />
       <Button layoutX="274.0" layoutY="33.0" mnemonicParsing="false" onAction="#pharmacyStaffStockViewButtonOA" prefHeight="26.0" prefWidth="213.0" text="Stock View" />

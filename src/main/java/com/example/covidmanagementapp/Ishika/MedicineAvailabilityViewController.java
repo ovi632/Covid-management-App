@@ -1,97 +1,90 @@
 package com.example.covidmanagementapp.Ishika;
 
 import com.example.covidmanagementapp.HelloApplication;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
-public class MedicineAvailabilityViewController {
-
+public class MedicineAvailabilityViewController
+{
     @javafx.fxml.FXML
-    private TableView<Medicine> medicineAvailabilityTableView;
-
+    private TableView<Medicine>  medicineAvailabilityTableView;
+    @javafx.fxml.FXML
+    private Label notificationLabel;
+    @javafx.fxml.FXML
+    private TextField medicineNameTF;
+    @javafx.fxml.FXML
+    private TableColumn<Medicine, Integer> medicineAvailabilityAvailableQuantityTC;
+    @javafx.fxml.FXML
+    private TableColumn<Medicine, String> medicineAvailabilityStatusTC;
     @javafx.fxml.FXML
     private TableColumn<Medicine, String> medicineAvailabilityMedicineNameTC;
 
     @javafx.fxml.FXML
-    private TableColumn<Medicine, Integer> medicineAvailabilityAvailableQuantityTC;
-
-    @javafx.fxml.FXML
-    private TableColumn<Medicine, String> medicineAvailabilityStatusTC;
-
-    @javafx.fxml.FXML
-    private TextField medicineNameTF;
-
-    @javafx.fxml.FXML
-    private Label notificationLabel;
-
-    private ArrayList<Medicine> medicineList = new ArrayList<>();
-
-    @javafx.fxml.FXML
     public void initialize() {
+        medicineAvailabilityMedicineNameTC.setCellValueFactory(c ->
+                new SimpleStringProperty(c.getValue().getName()));
 
-        // Bind columns
-        medicineAvailabilityMedicineNameTC.setCellValueFactory(new PropertyValueFactory<>("name"));
-        medicineAvailabilityAvailableQuantityTC.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        medicineAvailabilityStatusTC.setCellValueFactory(new PropertyValueFactory<>("status"));
+        medicineAvailabilityAvailableQuantityTC.setCellValueFactory(c ->
+                new SimpleObjectProperty<>(c.getValue().getQuantity()));
 
-        // Default data
-        medicineList.add(new Medicine("Paracetamol", 50));
-        medicineList.add(new Medicine("Napa", 10));
-        medicineList.add(new Medicine("Ace", 0));
-        medicineList.add(new Medicine("Vitamin C", 25));
-
-        // Show all medicines initially
-        showTable(medicineList);
-    }
-
-    public void showTable(ArrayList<Medicine> list) {
-        ObservableList<Medicine> data = FXCollections.observableArrayList(list);
-        medicineAvailabilityTableView.setItems(data);
-    }
-
-    @javafx.fxml.FXML
-    public void checkAvailabilityButtonOA(ActionEvent actionEvent) {
-
-        String searchName = medicineNameTF.getText().trim();
-
-        ArrayList<Medicine> filteredList = new ArrayList<>();
-
-        for (Medicine m : medicineList) {
-            if (m.getName().equalsIgnoreCase(searchName)) {
-                filteredList.add(m);
-            }
-        }
-
-        if (filteredList.isEmpty()) {
-            notificationLabel.setText("Medicine not found!");
-            medicineAvailabilityTableView.getItems().clear();
-        } else {
-            notificationLabel.setText("Result found");
-            showTable(filteredList);
-        }
+        medicineAvailabilityStatusTC.setCellValueFactory(c ->
+                new SimpleStringProperty(c.getValue().getStatus()));
     }
 
     @javafx.fxml.FXML
     public void backButtonOA(ActionEvent actionEvent) {
-        try {
+        try{
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ishika/pharmacyDashboardView.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setTitle("Pharmacy Dashboard");
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            Scene updateMedicineStockScenescene = new Scene(fxmlLoader.load());
+            Stage updateMedicineStockSceneStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            updateMedicineStockSceneStage.setTitle("Pharmacy Dashboard");
+            updateMedicineStockSceneStage.setScene(updateMedicineStockScenescene);
+            updateMedicineStockSceneStage.show();
+        }catch (Exception e){
+            //
         }
+    }
+
+    @javafx.fxml.FXML
+    public void checkAvailabilityButtonOA(ActionEvent actionEvent) {
+        medicineAvailabilityTableView.getItems().clear();
+
+        String name = medicineNameTF.getText().trim().toLowerCase();
+
+        Medicine m1 = new Medicine("Paracetamol", 50, "Available");
+        Medicine m2 = new Medicine("Napa", 0, "Out of Stock");
+        Medicine m3 = new Medicine("Antibiotic", 20, "Limited");
+
+        if (name.isEmpty()) {
+            notificationLabel.setText("Enter medicine name!");
+            return;
+        }
+
+        boolean found = false;
+
+        for (Medicine m : new Medicine[]{m1, m2, m3}) {
+
+            if (m.getName().toLowerCase().contains(name)) {
+                medicineAvailabilityTableView.getItems().add(m);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            notificationLabel.setText("Not found!");
+        } else {
+            notificationLabel.setText("Result loaded!");
+        }
+
+        medicineNameTF.clear();
     }
 }
