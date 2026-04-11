@@ -1,10 +1,15 @@
 package com.example.covidmanagementapp.Ashraf;
 
+import com.example.covidmanagementapp.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class doctorCheckPatientInfoViewController
 {
@@ -35,6 +40,16 @@ public class doctorCheckPatientInfoViewController
 
     @javafx.fxml.FXML
     public void backToDashboardButtonOA(ActionEvent actionEvent) {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/covidmanagementapp/Ashraf/doctorDashBoardView.fxml"));
+            Scene updateRecoveryStatusViewscene = new Scene(fxmlLoader.load());
+            Stage updateRecoveryStatusViewStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            updateRecoveryStatusViewStage.setTitle("Doctor Dashboard");
+            updateRecoveryStatusViewStage.setScene(updateRecoveryStatusViewscene);
+            updateRecoveryStatusViewStage.show();
+        }catch (Exception e){
+            //
+        }
     }
 
     @javafx.fxml.FXML
