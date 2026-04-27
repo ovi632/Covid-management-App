@@ -97,7 +97,7 @@ public class AddDiagnosisViewController
             oos.writeObject(d);
             oos.close();
 
-            // 🔥 READ LAST
+
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
             Diagnosis last = null;
 

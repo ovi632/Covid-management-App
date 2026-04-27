@@ -61,7 +61,7 @@ public class ViewPatientRecordsController
             for (User u : UserFile.userList) {
 
                 if (u.getUserId() == id) {
-                    viewPatientRecordsTV.getItems().add(u);
+                   // viewPatientRecordsTV.getItems().add();
                     found = true;
                 }
             }

@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -59,26 +60,26 @@ public class GenerateNewMadicineUsegeController
 
         reportDatePicker.setValue(LocalDate.now());
 
-        generateMUR_PatientNameTC.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getPatientName()));
+        generateMUR_PatientNameTC.setCellValueFactory(
+                new PropertyValueFactory<>("patientName"));
 
-        generateMUR_MedicineNameTC.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getMedicineName()));
+        generateMUR_MedicineNameTC.setCellValueFactory(
+                new PropertyValueFactory<>("medicineName"));
 
-        generateMUR_DosageTC.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getDosage()));
+        generateMUR_DosageTC.setCellValueFactory(
+                new PropertyValueFactory<>("dosage"));
 
-        generateMUR_TimesPerDayTC.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getTimesPerDay()));
+        generateMUR_TimesPerDayTC.setCellValueFactory(
+                new PropertyValueFactory<>("timesPerDay"));
 
-        generateMUR_TakenTimeTC.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getTakenTime()));
+        generateMUR_TakenTimeTC.setCellValueFactory(
+                new PropertyValueFactory<>("takenTime"));
 
-        generateMUR_DurationTC.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getDuration()));
+        generateMUR_DurationTC.setCellValueFactory(
+                new PropertyValueFactory<>("duration"));
 
-        generateMUR_ReportDateTC.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getReportDate()));
+        generateMUR_ReportDateTC.setCellValueFactory(
+                new PropertyValueFactory<>("reportDate"));
     }
 
     @javafx.fxml.FXML

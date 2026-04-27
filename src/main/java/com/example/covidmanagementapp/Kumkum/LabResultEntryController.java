@@ -46,7 +46,6 @@ public class LabResultEntryController {
             System.out.println("Submitting Result for " + patientNameLabel.getText());
             System.out.println("CT Value: " + ctValue + " | Result: " + result);
 
-            // Show success message
             Alert success = new Alert(Alert.AlertType.INFORMATION);
             success.setContentText("Result submitted successfully!");
             success.show();

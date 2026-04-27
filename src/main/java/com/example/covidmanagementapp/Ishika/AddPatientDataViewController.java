@@ -1,6 +1,7 @@
 package com.example.covidmanagementapp.Ishika;
 
 import com.example.covidmanagementapp.HelloApplication;
+import com.example.covidmanagementapp.User.AppendableObjectOutputStream;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,6 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class AddPatientDataViewController
 {
@@ -73,16 +79,17 @@ public class AddPatientDataViewController
 
             PatientData p = new PatientData(name, age, gender, phone, address);
 
-            java.io.File file = new java.io.File("PatientData.bin");
-            java.io.ObjectOutputStream oos;
+            File file = new File("PatientData.bin");
+            ObjectOutputStream oos;
 
             if (file.exists()) {
+
                 oos = new com.example.covidmanagementapp.util.AppendableObjectOutputStream(
-                        new java.io.FileOutputStream(file, true)
+                        new FileOutputStream(file, true)
                 );
             } else {
-                oos = new java.io.ObjectOutputStream(
-                        new java.io.FileOutputStream(file)
+                oos = new ObjectOutputStream(
+                        new FileOutputStream(file)
                 );
             }
 

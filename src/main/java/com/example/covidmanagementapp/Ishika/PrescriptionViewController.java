@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.EOFException;
@@ -41,13 +42,12 @@ public class PrescriptionViewController
 
     @javafx.fxml.FXML
     public void initialize() {
-
-        medicineInPrescriptionTC.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getMedicineName()));
-        dosageInPrescriptionTC.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getDosage()));
-        durationInPrescriptionTC.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getDuration()));
-        dateInPrescriptionTC.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getDate()));
-        instructionInPrescriptionTC.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getInstructions()));
-        doctorNameInPrescriptionTC.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getDoctorId())));
+        medicineInPrescriptionTC.setCellValueFactory(new PropertyValueFactory<>("medicineName"));
+        dosageInPrescriptionTC.setCellValueFactory(new PropertyValueFactory<>("dosage"));
+        durationInPrescriptionTC.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        dateInPrescriptionTC.setCellValueFactory(new PropertyValueFactory<>("date"));
+        instructionInPrescriptionTC.setCellValueFactory(new PropertyValueFactory<>("instructions"));
+        doctorNameInPrescriptionTC.setCellValueFactory(new PropertyValueFactory<>("doctorId"));
     }
 
     @javafx.fxml.FXML

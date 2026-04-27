@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -44,17 +45,17 @@ public class PatientDischargeManagerViewController
 
         wardCB.getItems().addAll("Ward A", "Ward B", "Ward C");
 
-        wardTC.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getWard()));
+        wardTC.setCellValueFactory(
+                new PropertyValueFactory<>("ward"));
 
-        statusTC.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getStatus()));
+        statusTC.setCellValueFactory(
+                new PropertyValueFactory<>("status"));
 
-        remarksTC.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getRemarks()));
+        remarksTC.setCellValueFactory(
+                new PropertyValueFactory<>("remarks"));
 
-        dischargeDateTC.setCellValueFactory(c ->
-                new SimpleStringProperty(c.getValue().getDate()));
+        dischargeDateTC.setCellValueFactory(
+                new PropertyValueFactory<>("date"));
     }
 
     @javafx.fxml.FXML
